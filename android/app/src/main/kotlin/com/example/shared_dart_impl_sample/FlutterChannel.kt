@@ -9,7 +9,6 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 class FlutterChannel(private val context: Context) {
-//    private var methodChannel: MethodChannel
     private var api: FlutterAPI
 
     init {
@@ -23,30 +22,9 @@ class FlutterChannel(private val context: Context) {
                     "nativeMain"
                 )
             )
-
-//            methodChannel = MethodChannel(
-//                dartExecutor.binaryMessenger,
-//                "dart_channel"
-//            )
             api = FlutterAPI(dartExecutor.binaryMessenger)
         }
     }
-
-//    suspend fun invokeMethod(method: String, arguments: Any?): Any? {
-//        suspendCoroutine { continuation ->
-//            methodChannel.invokeMethod(method, arguments, object : MethodChannel.Result {
-//                override fun success(result: Any?) {
-//                    continuation.resume(result)
-//                }
-//                override fun error(errorCode: String, errorMessage: String?, errorDetails: Any?) {
-//                    continuation.resumeWithException(RuntimeException(message = errorMessage))
-//                }
-//                override fun notImplemented() {
-//                    continuation.resumeWithException(NotImplementedError("Method not implemented"))
-//                }
-//            })
-//        }
-//    }
 
     suspend fun ping(): String = suspendCoroutine { continuation ->
         api.ping { continuation.resume(it) }

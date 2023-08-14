@@ -15,7 +15,6 @@ import Flutter
     private func doSomething() async {
         let flutterChannel = FlutterChannel()
         let result = await flutterChannel.ping()
-//        let result = await flutterChannel.invokeMethod("ping", arguments: nil)
         print("### ", result)
     }
 }
